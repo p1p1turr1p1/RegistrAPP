@@ -1,16 +1,20 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-img
-    src="./assets/logo/images.png"
-    alt="Logo Registrapp"
-  ></ion-img>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">    <div class="ion-text-center ion-padding">
+          <img src="./assets/logo/images.png" alt="logo" width="200px" height="auto">
+        </div> </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">login</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -18,15 +22,16 @@
     <ion-card-header>
       <ion-card-title>Inicio de Sesión</ion-card-title>
     </ion-card-header>
-    <ion-item>
+    <ion-item class="ion-padding">
       <ion-item>
-        <ion-input label="Usuario:" placeholder="Ingresa tu nombre de usuario."></ion-input>
+        <ion-input labelPlacement="floating" fill="solid" type="text" class="form-control" position="floating" label="  Usuario:" placeholder="Ingresa nombre de usuario." [(ngModel)]="usuario"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input label="Contraseña:" type="password" value="password"></ion-input>
+        <ion-input labelPlacement="floating" fill="solid" class="form-control" position="floating" label="  Contraseña:" type="password"  placeholder="Ingresa tu contraseña." [(ngModel)]="password"></ion-input>
       </ion-item>
       </ion-item>
-      <ion-button expand="block">Ingresar</ion-button>
+      <ion-button expand="block" [disabled]="usuario === ''||password === '' " (click)="irHome()">Entrar</ion-button>
+
     </ion-card>
   
 </ion-content>

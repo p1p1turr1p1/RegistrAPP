@@ -1,19 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
+  loggedUsuario: string = ''; //almacena usuario
 
-  constructor() {}
+  constructor(private router: Router) {}
 
-  ngOnInit(){
-
+  ngOnInit() {
+    this.loggedUsuario = localStorage.getItem('usuario') || '';
   }
-  ingresar(){
-    console.log("HICE CLICK");
-    
-  }
+
+  logOut() {
+    this.router.navigate(['/login']);
+} 
+
 }
