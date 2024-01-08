@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { AnimationController, IonCard, IonTitle } from '@ionic/angular';
+import { Animation } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,6 +10,10 @@ import { Router } from '@angular/router';
 })
 export class HomePage implements OnInit {
   loggedUsuario: string = ''; //almacena usuario
+
+
+  private animation!:Animation; 
+  constructor(private animationCtrl: AnimationController) { }
 
   constructor(private router: Router) {}
 
