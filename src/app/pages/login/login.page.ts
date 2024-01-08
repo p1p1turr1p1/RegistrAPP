@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { IonModal } from '@ionic/angular';
+import { OverlayEventDetail } from '@ionic/core/components';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -8,8 +11,28 @@ import { Router } from '@angular/router';
 
 
 
-
 export class LoginPage implements OnInit {
+
+  @ViewChild(IonModal) modal: IonModal;
+
+  mensaje = '';
+  correo: string;
+
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
+  }
+
+  confirm() {
+    this.modal.dismiss(this.correo, 'confirm');
+  }
+
+  onWillDismiss(event: Event) {
+    const ev = event as CustomEvent<OverlayEventDetail<string>>;
+    if (ev.detail.role === 'confirm') {
+      this.mensaje = `Se ha enviado un link de recupareción a tu correo.`;
+    }
+  }
+
   usuario: string = '';
   password: string = '';
 
