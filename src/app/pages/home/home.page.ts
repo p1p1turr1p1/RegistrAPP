@@ -12,10 +12,9 @@ export class HomePage implements OnInit {
   loggedUsuario: string = ''; //almacena usuario
 
 
-  private animation!:Animation; 
-  constructor(private animationCtrl: AnimationController) { }
+  constructor(private router: Router) { }
 
-  constructor(private router: Router) {}
+  
 
   ngOnInit() {
     this.loggedUsuario = localStorage.getItem('usuario') || '';
