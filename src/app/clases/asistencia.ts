@@ -63,6 +63,7 @@ export class Asistencia {
 //     }
 //   }
 
+
 //   /**
 //      * Método que carga en la listaNoticias TODO el contenido de la tabla noticia
 //      */
