@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
+import { CodigoQrComponent } from 'src/app/components/codigo-qr/codigo-qr.component';
+import { CodigoTextoComponent } from 'src/app/components/codigo-texto/codigo-texto.component';
 
 
 @NgModule({
