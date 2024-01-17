@@ -25,7 +25,7 @@ export class CodigoQrComponent  implements OnInit {
       handler: (data: RegistroAsistencia) => {
         console.log(data);
         this.serviceRest.addRegistro(data);
-        console.log(this.serviceRest.getRegistro(301));
+        console.log(this.serviceRest.getRegistro(302));
       },
     }
   ];
