@@ -1,4 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { Component, ElementRef, OnInit, QueryList, ViewChildren, ViewChild } from '@angular/core';
+import { AnimationController, IonImg, IonTitle } from '@ionic/angular';
+import { Animation } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
@@ -28,11 +31,12 @@ export class LoginPage implements OnInit {
 
 
 
-  constructor(private router: Router, private bdlocalservice: BdlocalService) { }
+
+  constructor(private router: Router, private bdlocalservice: BdlocalService, private animationCtrl: AnimationController) { }
 
 
 
-  cancel() {
+   cancel() {
     this.modal.dismiss(null, 'cancel');
   }
 
@@ -71,6 +75,34 @@ export class LoginPage implements OnInit {
 
   login(){
     this.bdlocalservice.login;
+  }
+
+ @ViewChildren(IonTitle, {read: ElementRef})
+  titleElements!:QueryList<ElementRef<HTMLIonTitleElement>>;
+  @ViewChildren(IonImg, {read:ElementRef})
+  iconElements!:QueryList<ElementRef<HTMLIonImgElement>>;
+
+  private animation!:Animation; 
+
+  ngAfterViewInit(){
+    const logo = this.animationCtrl
+    .create()
+    .addElement(this.iconElements.get(0)!.nativeElement)
+
+    .keyframes([
+      { offset: 0, transform: 'scale(1) rotate(0)' },
+      { offset: 0.25, transform: 'scale(1) rotate(45deg)' },
+      { offset: 0.75, transform: 'scale(1) rotate(-45deg)' },
+      { offset: 1, transform: 'scale(1) rotate(0)' }
+    ]);
+
+    this.animation=this.animationCtrl
+    .create()
+    .duration(1500)
+    .iterations(1)
+    .addAnimation([logo]);
+
+    this.animation.play();
   }
 
 }

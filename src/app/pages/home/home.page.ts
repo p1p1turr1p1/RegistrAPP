@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { AnimationController, IonCard, IonTitle } from '@ionic/angular';
+import { Animation } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { BdlocalService } from 'src/app/service/bdlocal.service';
+
 @Component({
 
   selector: 'app-home',
@@ -22,6 +25,8 @@ export class HomePage implements OnInit {
 
 
   }
-
+  irCodigo(){
+    this.router.navigate(['/codigo/codigoQr'])
+  }
 
 }
