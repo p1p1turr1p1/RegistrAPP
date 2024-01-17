@@ -1,10 +1,12 @@
+<ion-content [fullscreen]="true">
+
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-grid>
       <div class="ion-text-center ion-padding">
         <ion-row>
           <ion-col size="3">
-            <ion-img src="./assets/logo/codigo-qr.png" alt="logo2"></ion-img>
+            <img src="./assets/logo/codigo-qr.png" alt="logo2" width="100px" height="auto">
           </ion-col>
           <ion-col size="9">
             <img src="./assets/logo/images.png" alt="logo" width="200px" height="auto">
@@ -17,7 +19,6 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
     </ion-toolbar>
@@ -29,13 +30,13 @@
     </ion-card-header>
     <ion-item class="ion-padding">
       <ion-item>
-        <ion-input labelPlacement="floating" type="text" class="form-control" position="floating" label="  Usuario:" placeholder="Ingresa nombre de usuario." [(ngModel)]="usuario"></ion-input>
+        <ion-input labelPlacement="floating" type="text" class="form-control" position="floating" label="  Usuario:" placeholder="Ingresa nombre de usuario." [(ngModel)]="username"></ion-input>
       </ion-item>
       <ion-item>
         <ion-input labelPlacement="floating"  class="form-control" position="floating" label="  Contraseña:" type="password"  placeholder="Ingresa tu contraseña." [(ngModel)]="password"></ion-input>
       </ion-item>
       </ion-item>
-      <ion-button expand="block" [disabled]="usuario === ''||password === '' " (click)="irHome()">Entrar</ion-button>
+      <ion-button expand="block" [disabled]="username === ''||password === '' " (click)="irHome()">Entrar</ion-button>
       <br>    
       
 
@@ -49,7 +50,7 @@
               <ion-buttons slot="start">
                 <ion-button (click)="cancel()">Cancelar</ion-button>
               </ion-buttons>
-              <ion-title class="centrar-titulomodal" >¿Olvidaste tu contraseña?</ion-title>
+              <ion-title class="centrar-titulomodal" >Recuprar pass.</ion-title>
               <ion-toast trigger="open-toast" message="{{mensaje}}" [duration]="5000"></ion-toast>
               <ion-buttons slot="end">
                 <ion-button (click)="confirm()" [strong]="true" id="open-toast" >Confirmar</ion-button>
@@ -69,7 +70,35 @@
           </ion-content>
         </ng-template>
       </ion-modal>
-      <br>    
+      <br>
+
+      <ion-button id="modal-registro" expand="block">Registro</ion-button>
+      <ion-modal #modal trigger="modal-registro" (willDismiss)="onWillDismiss($event)">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-title>Modal</ion-title>
+              <ion-buttons slot="end">
+                <ion-button (click)="modal.dismiss()">Cerrar</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content class="ion-padding">
+            <p>
+              <ion-input type="text" placeholder="Ingrese Nombre:" [(ngModel)]="username"></ion-input>
+              <ion-input type="password" placeholder="Ingrese contraseña:" [(ngModel)]="password"></ion-input>
+              <ion-input type="email" placeholder="algo@algo.com" [(ngModel)]="email"></ion-input>
+              <ion-button shape="block" (click)="registrar()" type="button" class="btn btn-success">Registrarse</ion-button> 
+            </p>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
+
+
+
+
+     
+
     </ion-card>
 
 </ion-content>

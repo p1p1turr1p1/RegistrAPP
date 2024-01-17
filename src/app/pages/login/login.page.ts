@@ -5,6 +5,8 @@ import { Animation } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
+import { BdlocalService } from 'src/app/service/bdlocal.service';
+
 
 @Component({
   selector: 'app-login',
@@ -14,20 +16,27 @@ import { OverlayEventDetail } from '@ionic/core/components';
 
 
 
+
+
 export class LoginPage implements OnInit {
-
-user={
-  usuario:"",
-  clave:""
-}
-
 
   @ViewChild(IonModal) modal: IonModal;
 
+
+
+
   mensaje = '';
+  mensajeRe= 'Registro completo';
   correo: string;
 
-  cancel() {
+
+
+
+  constructor(private router: Router, private bdlocalservice: BdlocalService, private animationCtrl: AnimationController) { }
+
+
+
+   cancel() {
     this.modal.dismiss(null, 'cancel');
   }
 
@@ -42,21 +51,33 @@ user={
     }
   }
 
-  usuario: string = '';
-  password: string = '';
-
-  constructor(private animationCtrl: AnimationController, private router: Router) { }
-
   
   irHome() {
-    localStorage.setItem('usuario', this.usuario);
+    localStorage.setItem('username', this.username);
     this.router.navigate(['/home']);
 } 
-
   ngOnInit() {
   }
 
-  @ViewChildren(IonTitle, {read: ElementRef})
+  username!: string;
+  password!: string;
+  email!: string;
+
+
+  registrar(){
+    console.log(this.username);
+    console.log(this.email);
+    this.bdlocalservice.registrarse(this.username,this.password,this.email);
+
+  }
+
+
+
+  login(){
+    this.bdlocalservice.login;
+  }
+
+ @ViewChildren(IonTitle, {read: ElementRef})
   titleElements!:QueryList<ElementRef<HTMLIonTitleElement>>;
   @ViewChildren(IonImg, {read:ElementRef})
   iconElements!:QueryList<ElementRef<HTMLIonImgElement>>;
@@ -83,4 +104,5 @@ user={
 
     this.animation.play();
   }
+
 }
