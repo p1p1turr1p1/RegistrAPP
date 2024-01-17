@@ -25,7 +25,7 @@ export class HomePage implements OnInit {
 } 
 
   irCodigo(){
-    this.router.navigate(['/codigo'])
+    this.router.navigate(['/codigo/codigoQr'])
   }
 
 }

@@ -1,9 +1,11 @@
 <ion-card>
-  <ion-img src='./assets/logo/qrEjemplo.png' width=2px></ion-img>
   <div class="center-card">
-  <ion-card-header>
-    <ion-card-title>Escanea el codigo Qr!</ion-card-title>
-  </ion-card-header>
-  <ion-button>Ingresar</ion-button></div>
-  
+    <ion-card-header>
+      <ion-card-title>Ingresa codigo manualmente</ion-card-title>
+    </ion-card-header>
+    <ion-input label="Codigo" type="number" fill="solid" placeholder="000 000"></ion-input>
+    <ion-button id="confirmar">Ingresar</ion-button>
+    <ion-alert trigger="confirmar" header="Please enter your info" [buttons]="alertButtons"
+      [inputs]="alertInputs"></ion-alert>
+  </div>
 </ion-card>

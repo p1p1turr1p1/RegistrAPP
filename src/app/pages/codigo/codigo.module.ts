@@ -17,6 +17,6 @@ import { CodigoQrComponent } from 'src/app/components/codigo-qr/codigo-qr.compon
     IonicModule,
     CodigoPageRoutingModule
   ],
-  declarations: [CodigoPage,CodigoQrComponent,CodigoTextoComponent]
+  declarations: [CodigoPage,CodigoQrComponent,CodigoTextoComponent,]
 })
 export class CodigoPageModule {}
