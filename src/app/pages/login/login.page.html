@@ -36,7 +36,7 @@
         <ion-input labelPlacement="floating"  class="form-control" position="floating" label="  Contraseña:" type="password"  placeholder="Ingresa tu contraseña." [(ngModel)]="password"></ion-input>
       </ion-item>
       </ion-item>
-      <ion-button expand="block" [disabled]="username === ''||password === '' " (click)="irHome()">Entrar</ion-button>
+      <ion-button expand="block" [disabled]="username === ''||password === '' " (click)="login()">Entrar</ion-button>
       <br>    
       
 
@@ -73,7 +73,7 @@
       <br>
 
       <ion-button id="modal-registro" expand="block">Registro</ion-button>
-      <ion-modal #modal trigger="modal-registro" (willDismiss)="onWillDismiss($event)">
+      <ion-modal #modal trigger="modal-registro" (willDismiss)="onWillDismiss($event) ">
         <ng-template>
           <ion-header>
             <ion-toolbar>

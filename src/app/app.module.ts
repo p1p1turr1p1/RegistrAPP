@@ -10,7 +10,7 @@ import { AuthGuard } from './guards/auth.guard';
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, SQLite, Storage, AuthGuard],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, Storage, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

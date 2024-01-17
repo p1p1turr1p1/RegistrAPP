@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class BdlocalService {
 
 
@@ -65,22 +67,15 @@ export class BdlocalService {
 
 
   async login(Username: string, Password: string) {
-    // Recuperar los usuarios almacenados
     const usuarios: any[] = await this.storage.get('user');
-  
-    // Encontrar el usuario que coincide con el nombre de usuario y la contraseña
+    // encontrar usuario en la bd y la contraseña
     const usuarioEncontrado = usuarios.find(m => m.username === Username && m.password === Password);
-  
     if (usuarioEncontrado) {
-      // Iniciar sesión exitosa
       console.log('Usuario logueado:', usuarioEncontrado);
-      // Almacenar el usuario autenticado en el almacenamiento local o en una variable global
       await this.storage.set('usuarioAutenticado', usuarioEncontrado);
-      // Redireccionar a la página principal o realizar otras acciones necesarias
-      this.presentToast("Usuario logueado correctamente.");
+      this.presentToast("Usuario logueado.");
       this.router.navigate(['/home']);
     } else {
-      // Credenciales incorrectas
       this.presentToast("Usuario o contraseña incorrectos.");
     }
   }

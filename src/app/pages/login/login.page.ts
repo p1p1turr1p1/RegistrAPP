@@ -56,8 +56,6 @@ export class LoginPage implements OnInit {
     localStorage.setItem('username', this.username);
     this.router.navigate(['/home']);
 } 
-  ngOnInit() {
-  }
 
   username!: string;
   password!: string;
@@ -71,13 +69,15 @@ export class LoginPage implements OnInit {
 
   }
 
+login(){
+  this.bdlocalservice.login(this.username, this.password);
+}
 
-
-  login(){
-    this.bdlocalservice.login;
+  
+  ngOnInit() {
   }
 
- @ViewChildren(IonTitle, {read: ElementRef})
+  @ViewChildren(IonTitle, {read: ElementRef})
   titleElements!:QueryList<ElementRef<HTMLIonTitleElement>>;
   @ViewChildren(IonImg, {read:ElementRef})
   iconElements!:QueryList<ElementRef<HTMLIonImgElement>>;
@@ -104,5 +104,4 @@ export class LoginPage implements OnInit {
 
     this.animation.play();
   }
-
 }
