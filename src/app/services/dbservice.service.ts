@@ -80,10 +80,7 @@ export class DbserviceService {
      */
   async addAsistencia(id_alumno: any, fecha: any, tipo: any) {
     let data = [id_alumno,fecha, tipo];
-    await this.database.executeSql(
-      'INSERT INTO asistencia(id_alumno,fecha,tipo) VALUES(?,?,?)',
-      data,
-    );
+    await this.database.executeSql('INSERT INTO asistencia(id_alumno,fecha,tipo) VALUES(?,?,?)',data);
     this.cargarAsistencias();
   }
 

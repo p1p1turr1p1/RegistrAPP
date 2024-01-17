@@ -14,30 +14,30 @@ import { Alumno } from 'src/app/clases/alumno';
 export class HomePage implements OnInit {
   loggedUsuario: string = ''; //almacena usuario
 
-  constructor(private router: Router, private dbservice: DbserviceService, private asistencia: Asistencia) {}
+  id_alumno: Number;
+  fecha: Date;
+  tipo: string;
+
+  constructor(private router: Router, private dbservice: DbserviceService,) { }
 
   ngOnInit() {
     this.loggedUsuario = localStorage.getItem('usuario') || '';
-    this.dbservice.crearBD;
   }
 
   logOut() {
     this.router.navigate(['/login']);
-    
-
-}
-
-cargar() {
-  this.dbservice.cargarAsistencias;
-
-}
-
-addAsistencia(){
-  
-  this.dbservice.addAsistencia;
-
-}
 
 
+  }
+
+  cargar() {
+    this.dbservice.cargarAsistencias;
+
+  }
+
+  addAsistencia() {
+    this.dbservice.addAsistencia(this.id_alumno, this.fecha, this.tipo);
+
+  }
 
 }
