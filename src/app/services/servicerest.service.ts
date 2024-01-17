@@ -21,7 +21,7 @@ export class ServicerestService {
   constructor(private http: HttpClient) { }
 
   getRegistro(id: any): Observable<RegistroAsistencia[]> {
-    console.log('Entre aca '+`${this.URL}/Asistencia/` + id);
+    console.log('Entre aca '+`${this.URL}/Asistencia/` + id + '.json');
     return this.http.get<RegistroAsistencia[]>(`${this.URL}/Asistencia/` + id).pipe(
       tap((_) => console.log(`RegistroAsistencia fetched: ${id}`)),
       catchError(this.handleError<RegistroAsistencia[]>(`Get registro id=${id}`))
@@ -29,12 +29,12 @@ export class ServicerestService {
   }
   getRegistroList(): Observable<RegistroAsistencia[]> {
     return this.http.get<RegistroAsistencia[]>(`${this.URL}/Asistencia/`).pipe(
-      tap((RegistroAsistencia) => console.log('RegistroAsistencia fetched!')),
+      tap((RegistroAsistencia) => console.log('RegistroAsistencia fetched!')),  
       catchError(this.handleError<RegistroAsistencia[]>('Get registro', []))
     );
   }
   addRegistro(registro: RegistroAsistencia): Observable<any> {
-    console.log("Entre aca");
+    console.log(registro);
     return this.http
       .post<RegistroAsistencia>(`${URL}/Asistencia/`, registro, this.httpHeader)
       .pipe(catchError(this.handleError<RegistroAsistencia>('Add RegistroAsistencia')));

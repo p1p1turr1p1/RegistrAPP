@@ -29,4 +29,7 @@ export class HomePage implements OnInit {
     this.router.navigate(['/codigo/codigoQr'])
   }
 
+  irAsistencia(){
+    this.router.navigate(['/asistencia'])
+  }
 }
