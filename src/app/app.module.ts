@@ -4,7 +4,6 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 import { Storage } from '@ionic/storage';
 import { AuthGuard } from './guards/auth.guard';
 
@@ -15,5 +14,7 @@ import { AuthGuard } from './guards/auth.guard';
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+
 
 
