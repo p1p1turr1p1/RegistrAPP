@@ -78,10 +78,10 @@ export class DbserviceService {
   /**
      * Método que inserta un registro en la tabla noticia
      */
-  async addAsistencia(fecha: any, tipo: any) {
-    let data = [fecha, tipo];
+  async addAsistencia(id_alumno: any, fecha: any, tipo: any) {
+    let data = [id_alumno,fecha, tipo];
     await this.database.executeSql(
-      'INSERT INTO asistencia(id_asistencia,id_alumno,fecha,tipo) VALUES(?,?)',
+      'INSERT INTO asistencia(id_alumno,fecha,tipo) VALUES(?,?,?)',
       data,
     );
     this.cargarAsistencias();

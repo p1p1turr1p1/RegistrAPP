@@ -23,7 +23,24 @@
 
 
  <h1>¡Hola  {{loggedUsuario}}!</h1>
+
+
+
  <br>
+ <ion-form>
+  <ion-item>
+    <ion-input type="number" [(ngModel)]="id_alumno"></ion-input>
+
+    <ion-label>Fecha</ion-label>
+    <ion-input type="date" [(ngModel)]="fecha"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Tipo</ion-label>
+    <ion-input type="text" [(ngModel)]="tipo"></ion-input>
+  </ion-item>
+  <ion-button color="primary" (click)="addAsistencia()">Guardar</ion-button>
+</ion-form>
+
 
 <ion-card>
   <div class="ion-text-center ion-padding">
