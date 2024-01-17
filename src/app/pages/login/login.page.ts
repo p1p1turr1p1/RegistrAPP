@@ -5,6 +5,8 @@ import { Animation } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
+import { BdlocalService } from 'src/app/service/bdlocal.service';
+
 
 @Component({
   selector: 'app-login',
@@ -14,20 +16,27 @@ import { OverlayEventDetail } from '@ionic/core/components';
 
 
 
+
+
 export class LoginPage implements OnInit {
-
-user={
-  usuario:"",
-  clave:""
-}
-
 
   @ViewChild(IonModal) modal: IonModal;
 
+
+
+
   mensaje = '';
+  mensajeRe= 'Registro completo';
   correo: string;
 
-  cancel() {
+
+
+
+  constructor(private router: Router, private bdlocalservice: BdlocalService, private animationCtrl: AnimationController) { }
+
+
+
+   cancel() {
     this.modal.dismiss(null, 'cancel');
   }
 
@@ -42,45 +51,61 @@ user={
     }
   }
 
-  usuario: string = '';
-  password: string = '';
-
-  constructor(private animationCtrl: AnimationController, private router: Router) { }
-
   
   irHome() {
-    localStorage.setItem('usuario', this.usuario);
+    localStorage.setItem('username', this.username);
     this.router.navigate(['/home']);
 } 
 
+  username!: string;
+  password!: string;
+  email!: string;
+
+
+  registrar(){
+    console.log(this.username);
+    console.log(this.email);
+    this.bdlocalservice.registrarse(this.username,this.password,this.email);
+    this.modal.dismiss;
+
+  }
+
+login(){
+  
+  
+  this.bdlocalservice.login(this.username, this.password);
+  
+}
+
+  
   ngOnInit() {
   }
 
-  @ViewChildren(IonTitle, {read: ElementRef})
-  titleElements!:QueryList<ElementRef<HTMLIonTitleElement>>;
-  @ViewChildren(IonImg, {read:ElementRef})
-  iconElements!:QueryList<ElementRef<HTMLIonImgElement>>;
+  // @ViewChildren(IonTitle, {read: ElementRef})
+  // titleElements!:QueryList<ElementRef<HTMLIonTitleElement>>;
+  // @ViewChildren(IonImg, {read:ElementRef})
+  // iconElements!:QueryList<ElementRef<HTMLIonImgElement>>;
 
-  private animation!:Animation; 
+  // private animation!:Animation; 
 
-  ngAfterViewInit(){
-    const logo = this.animationCtrl
-    .create()
-    .addElement(this.iconElements.get(0)!.nativeElement)
+  // ngAfterViewInit(){
+  //   const logo = this.animationCtrl
+  //   .create()
+  //   .addElement(this.iconElements.get(0)!.nativeElement)
 
-    .keyframes([
-      { offset: 0, transform: 'scale(1) rotate(0)' },
-      { offset: 0.25, transform: 'scale(1) rotate(45deg)' },
-      { offset: 0.75, transform: 'scale(1) rotate(-45deg)' },
-      { offset: 1, transform: 'scale(1) rotate(0)' }
-    ]);
+  //   .keyframes([
+  //     { offset: 0, transform: 'scale(1) rotate(0)' },
+  //     { offset: 0.25, transform: 'scale(1) rotate(45deg)' },
+  //     { offset: 0.75, transform: 'scale(1) rotate(-45deg)' },
+  //     { offset: 1, transform: 'scale(1) rotate(0)' }
+  //   ]);
 
-    this.animation=this.animationCtrl
-    .create()
-    .duration(1500)
-    .iterations(1)
-    .addAnimation([logo]);
+  //   this.animation=this.animationCtrl
+  //   .create()
+  //   .duration(1500)
+  //   .iterations(1)
+  //   .addAnimation([logo]);
 
-    this.animation.play();
-  }
+  //   this.animation.play();
+  // }
 }
