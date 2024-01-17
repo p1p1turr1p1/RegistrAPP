@@ -63,7 +63,9 @@ export class BdlocalService {
     }
   }
 
-
+getAuthUser(usuarioAutenticado: String){
+  this._storage?.get('usuarioAutenticado');
+}
 
 
   async login(Username: string, Password: string) {
@@ -72,9 +74,10 @@ export class BdlocalService {
     const usuarioEncontrado = usuarios.find(m => m.username === Username && m.password === Password);
     if (usuarioEncontrado) {
       console.log('Usuario logueado:', usuarioEncontrado);
-      await this.storage.set('usuarioAutenticado', usuarioEncontrado);
+      await this.storage.set('usuarioAutenticado', usuarioEncontrado);  
       this.presentToast("Usuario logueado.");
       this.router.navigate(['/home']);
+      this._storage?.get('username');
     } else {
       this.presentToast("Usuario o contraseña incorrectos.");
     }

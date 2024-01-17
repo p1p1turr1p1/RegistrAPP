@@ -66,42 +66,46 @@ export class LoginPage implements OnInit {
     console.log(this.username);
     console.log(this.email);
     this.bdlocalservice.registrarse(this.username,this.password,this.email);
+    this.modal.dismiss;
 
   }
 
 login(){
+  
+  
   this.bdlocalservice.login(this.username, this.password);
+  
 }
 
   
   ngOnInit() {
   }
 
-  @ViewChildren(IonTitle, {read: ElementRef})
-  titleElements!:QueryList<ElementRef<HTMLIonTitleElement>>;
-  @ViewChildren(IonImg, {read:ElementRef})
-  iconElements!:QueryList<ElementRef<HTMLIonImgElement>>;
+  // @ViewChildren(IonTitle, {read: ElementRef})
+  // titleElements!:QueryList<ElementRef<HTMLIonTitleElement>>;
+  // @ViewChildren(IonImg, {read:ElementRef})
+  // iconElements!:QueryList<ElementRef<HTMLIonImgElement>>;
 
-  private animation!:Animation; 
+  // private animation!:Animation; 
 
-  ngAfterViewInit(){
-    const logo = this.animationCtrl
-    .create()
-    .addElement(this.iconElements.get(0)!.nativeElement)
+  // ngAfterViewInit(){
+  //   const logo = this.animationCtrl
+  //   .create()
+  //   .addElement(this.iconElements.get(0)!.nativeElement)
 
-    .keyframes([
-      { offset: 0, transform: 'scale(1) rotate(0)' },
-      { offset: 0.25, transform: 'scale(1) rotate(45deg)' },
-      { offset: 0.75, transform: 'scale(1) rotate(-45deg)' },
-      { offset: 1, transform: 'scale(1) rotate(0)' }
-    ]);
+  //   .keyframes([
+  //     { offset: 0, transform: 'scale(1) rotate(0)' },
+  //     { offset: 0.25, transform: 'scale(1) rotate(45deg)' },
+  //     { offset: 0.75, transform: 'scale(1) rotate(-45deg)' },
+  //     { offset: 1, transform: 'scale(1) rotate(0)' }
+  //   ]);
 
-    this.animation=this.animationCtrl
-    .create()
-    .duration(1500)
-    .iterations(1)
-    .addAnimation([logo]);
+  //   this.animation=this.animationCtrl
+  //   .create()
+  //   .duration(1500)
+  //   .iterations(1)
+  //   .addAnimation([logo]);
 
-    this.animation.play();
-  }
+  //   this.animation.play();
+  // }
 }

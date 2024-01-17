@@ -14,7 +14,7 @@ export class HomePage implements OnInit {
   loggedUsuario: string = ''; //almacena usuario
 
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private bdlocalservice: BdlocalService) { }
 
   ngOnInit() {
     this.loggedUsuario = localStorage.getItem('username') || '';
