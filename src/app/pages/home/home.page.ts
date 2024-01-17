@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DbserviceService } from 'src/app/services/dbservice.service';
-import { Asistencia } from 'src/app/clases/asistencia';
-import { SQLiteObject } from "@awesome-cordova-plugins/sqlite";
-import { Alumno } from 'src/app/clases/alumno';
-
+import { BdlocalService } from 'src/app/service/bdlocal.service';
 @Component({
 
   selector: 'app-home',
@@ -14,14 +10,11 @@ import { Alumno } from 'src/app/clases/alumno';
 export class HomePage implements OnInit {
   loggedUsuario: string = ''; //almacena usuario
 
-  id_alumno: Number;
-  fecha: Date;
-  tipo: string;
 
-  constructor(private router: Router, private dbservice: DbserviceService,) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
-    this.loggedUsuario = localStorage.getItem('usuario') || '';
+    this.loggedUsuario = localStorage.getItem('username') || '';
   }
 
   logOut() {
@@ -30,14 +23,5 @@ export class HomePage implements OnInit {
 
   }
 
-  cargar() {
-    this.dbservice.cargarAsistencias;
-
-  }
-
-  addAsistencia() {
-    this.dbservice.addAsistencia(this.id_alumno, this.fecha, this.tipo);
-
-  }
 
 }
