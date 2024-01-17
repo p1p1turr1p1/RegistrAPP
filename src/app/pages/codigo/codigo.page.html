@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="#"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Escanear codigo </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+  <ion-toolbar>
+    <ion-segment (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="codigoQr">
+        <ion-icon name="qr-code-outline"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="codigoTexto">
+        <ion-icon name="reader-outline"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+   </ion-toolbar>
+
+ <ion-content [fullscreen]="true">
+  <ion-router-outlet></ion-router-outlet>
+ </ion-content>
+

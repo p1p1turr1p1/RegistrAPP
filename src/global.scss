@@ -30,3 +30,16 @@
     color: aqua;
     background-color: #292b33;
   }
+
+ion-card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ion-button{
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
