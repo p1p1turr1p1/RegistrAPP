@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule),
   },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
@@ -18,15 +19,15 @@ const routes: Routes = [
   {
     path: 'recuperar',
     loadChildren: () => import('./pages/recuperar/recuperar.module').then( m => m.RecuperarPageModule)
-  },  {
+  },
+   {
     path: 'codigo',
     loadChildren: () => import('./pages/codigo/codigo.module').then( m => m.CodigoPageModule)
-  },
+   },
   {
-    path: 'asistencia',
-    loadChildren: () => import('./pages/asistencia/asistencia.module').then( m => m.AsistenciaPageModule)
+    path: '**',
+    component: NotFoundComponent 
   },
-
 ];
 
 @NgModule({
