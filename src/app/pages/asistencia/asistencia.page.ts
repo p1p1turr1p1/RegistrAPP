@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicerestService } from 'src/app/services/servicerest.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-asistencia',
   templateUrl: './asistencia.page.html',
@@ -8,20 +8,25 @@ import { ServicerestService } from 'src/app/services/servicerest.service';
 })
 export class AsistenciaPage implements OnInit {
 
+  filterTerm: String;
   registros: any;
 
-  constructor(private serviceRest: ServicerestService) { }
+  constructor(private serviceRest: ServicerestService, private router: Router) { }
 
-  ngOnInit() {
-    this.getRegistroList();
+
+  ngOnInit(): void {
+    this.serviceRest.getRegistroList().subscribe((data) => {
+      console.log(data);
+      this.registros = data;
+    });
   }
 
-  getRegistroList(){
-    this.serviceRest.getRegistroList().subscribe((data)=>{
-      console.log(data);
-      this.registros=data;
-    });
-    console.log(this.registros);
+  filtrarAsignatura(registro:any){
+
+  }
+
+  irDetalleAsistencia(asistencia:String){
+    this.router.navigate([`/asistencia/detalleAsistencia/`])
   }
 
 }

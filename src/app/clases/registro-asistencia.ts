@@ -1,5 +1,5 @@
 export class RegistroAsistencia {
-    id: number;
+    id: string;
     alumno: string;
     asignatura:string;
     profesor:string;

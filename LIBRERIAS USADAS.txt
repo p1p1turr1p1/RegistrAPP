@@ -1,0 +1,14 @@
+LIBRERIAS USADAS:
+
+
+npm install @ionic-native/core --legacy-peer-deps
+npm install @ionic/storage-angular
+npm install @angular/cli -g
+npm install -g json-server
+npm i ngx-search-filter --save (--force)
+
+
+
+Links Utilidad:
+https://www.positronx.io/create-ionic-angular-http-service/#tc_7624_04
+https://danielk.tech/home/angular-how-to-apply-filters-to-ngfor

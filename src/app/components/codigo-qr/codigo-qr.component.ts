@@ -22,10 +22,9 @@ export class CodigoQrComponent  implements OnInit {
     {
       text: 'Confirmar',
       role: 'confirm',
-      handler: (data: RegistroAsistencia) => {
+      handler: (data: any) => {
         console.log(data);
         this.serviceRest.addRegistro(data);
-        console.log(this.serviceRest.getRegistro(302));
       },
     }
   ];
