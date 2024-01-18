@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
-import { Observable,of } from 'rxjs';
+import { Observable,of,retry } from 'rxjs';
 import { RegistroAsistencia } from '../clases/registro-asistencia';
 
 @Injectable({
@@ -9,7 +9,8 @@ import { RegistroAsistencia } from '../clases/registro-asistencia';
 })
 export class ServicerestService {
 
-  URL: string ='https://registrapp-923b2-default-rtdb.firebaseio.com';
+  URL: string ='http://localhost:3000';
+  constructor(private http: HttpClient) { }
 
   httpHeader = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json',
@@ -18,26 +19,32 @@ export class ServicerestService {
   };
 
 
-  constructor(private http: HttpClient) { }
 
   getRegistro(id: any): Observable<RegistroAsistencia[]> {
-    console.log('Entre aca '+`${this.URL}/Asistencia/` + id + '.json');
-    return this.http.get<RegistroAsistencia[]>(`${this.URL}/Asistencia/` + id).pipe(
-      tap((_) => console.log(`RegistroAsistencia fetched: ${id}`)),
-      catchError(this.handleError<RegistroAsistencia[]>(`Get registro id=${id}`))
-    );
+    console.log(this.URL + '/asistencia/' + id);
+    return this.http
+      .get<RegistroAsistencia[]>(this.URL + '/asistencia/' + id)
+      .pipe(retry(1), catchError(this.handleError<RegistroAsistencia[]>(`Get registro id=${id}`)));
   }
   getRegistroList(): Observable<RegistroAsistencia[]> {
-    return this.http.get<RegistroAsistencia[]>(`${this.URL}/Asistencia/`).pipe(
+    return this.http.get<RegistroAsistencia[]>(`${this.URL}/asistencia/`).pipe(
       tap((RegistroAsistencia) => console.log('RegistroAsistencia fetched!')),  
       catchError(this.handleError<RegistroAsistencia[]>('Get registro', []))
     );
   }
-  addRegistro(registro: RegistroAsistencia): Observable<any> {
-    console.log(registro);
+  addRegistro(registro: RegistroAsistencia): Observable<RegistroAsistencia> {
+    console.log(this.http
+      .post<RegistroAsistencia>(
+        this.URL + '/asistencia',
+        JSON.stringify(registro),
+        this.httpHeader));
     return this.http
-      .post<RegistroAsistencia>(`${URL}/Asistencia/`, registro, this.httpHeader)
-      .pipe(catchError(this.handleError<RegistroAsistencia>('Add RegistroAsistencia')));
+      .post<RegistroAsistencia>(
+        this.URL + '/asistencia',
+        JSON.stringify(registro),
+        this.httpHeader
+      )
+      .pipe(retry(1), catchError(this.handleError<RegistroAsistencia>('Add RegistroAsistencia')));
   }
   updateRegistro(id: any, registro: RegistroAsistencia): Observable<any> {
     return this.http.put(`${URL}/Asistencia/` + id, registro, this.httpHeader).pipe(

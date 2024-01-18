@@ -7,26 +7,45 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-  <ion-card>
-    <ion-card-content>
-      <ion-list>
-        <ion-item>
-          <ion-label>
-            <h1>14/05/23 Ingles 1</h1>
-            <p>Presente</p>
-          </ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>
-            <h1>15/05/23 Ingles 1</h1>
-            <p>Presente</p>
-          </ion-label>
-        </ion-item>
-        <ion-item *ngFor="let registro of registros"  >
-          <ion-label><h4>{{registro.fecha}} {{registro.asignatura}}</h4>
-            <p>{{registro.estado}}</p></ion-label>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
+
+  <ion-accordion-group>
+    <ion-accordion value="Filosofia 1" [(ngModel)]="filterTerm" toggleIcon="caret-down-circle" toggleIconSlot="end">
+      <ion-item slot="header" color="light">
+        <ion-label>
+          <p>QWE1212-012023</p>
+          <h1>Filosofia 1</h1>
+        </ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-list *ngFor="let registro of registros | filter:filterTerm">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-label>
+                  <h3>{{registro.fecha}}</h3>
+                </ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-label>
+                  <h3> {{registro.estado}}</h3>
+                </ion-label>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          
+        </ion-list>
+      </div>
+
+    </ion-accordion>
+    <ion-accordion value="Ingles 1" toggleIcon="caret-down-circle" toggleIconSlot="end">
+      <ion-item slot="header" color="light">
+        <ion-label>
+          <p>INI1212-012023</p>
+          <h1>Ingles 1</h1>
+        </ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">First Content</div>
+    </ion-accordion>
+  </ion-accordion-group>
+
 </ion-content>

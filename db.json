@@ -1,0 +1,29 @@
+{
+  "asistencia": [
+    {
+      "id": "1",
+      "alumno": "Pedro Lopez",
+      "asignatura": "Filosofia 1",
+      "estado": "Presente",
+      "fecha": "24/12/24",
+      "profesor": "Alberto Plaza"
+    },
+    {
+      "id": "2",
+      "alumno": "Pedro Lopez",
+      "asignatura": "Filosofia 2",
+      "estado": "Presente",
+      "fecha": "12/10/24",
+      "profesor": "Alberto Plaza"
+    },
+
+    {
+      "id": "3",
+      "alumno": "Pedro Lopez",
+      "asignatura": "Filosofia 2",
+      "estado": "Ausente",
+      "fecha": "14/10/24",
+      "profesor": "Alberto Plaza"
+    }
+  ]
+}
