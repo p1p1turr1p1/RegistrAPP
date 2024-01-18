@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { AsistenciaPageRoutingModule } from './asistencia-routing.module';
 
 import { AsistenciaPage } from './asistencia.page';
-import { DetalleAsistenciaComponent } from 'src/app/components/detalle-asistencia/detalle-asistencia.component';
 import { NgxSearchFilterModule } from 'ngx-search-filter';
 
 @NgModule({
@@ -18,6 +17,6 @@ import { NgxSearchFilterModule } from 'ngx-search-filter';
     AsistenciaPageRoutingModule,
     NgxSearchFilterModule,
   ],
-  declarations: [AsistenciaPage,DetalleAsistenciaComponent]
+  declarations: [AsistenciaPage]
 })
 export class AsistenciaPageModule {}

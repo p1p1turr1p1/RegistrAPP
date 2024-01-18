@@ -9,7 +9,7 @@
 <ion-content [fullscreen]="true">
 
   <ion-accordion-group>
-    <ion-accordion value="Filosofia 1" [(ngModel)]="filterTerm" toggleIcon="caret-down-circle" toggleIconSlot="end">
+    <ion-accordion value="Filosofia 1"  toggleIcon="caret-down-circle" toggleIconSlot="end">
       <ion-item slot="header" color="light">
         <ion-label>
           <p>QWE1212-012023</p>
@@ -17,7 +17,7 @@
         </ion-label>
       </ion-item>
       <div class="ion-padding" slot="content">
-        <ion-list *ngFor="let registro of registros | filter:filterTerm">
+        <ion-list *ngFor="let registro of registros">
           <ion-grid>
             <ion-row>
               <ion-col>
