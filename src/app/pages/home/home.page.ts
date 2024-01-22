@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular
 import { AnimationController, IonCard, IonTitle } from '@ionic/angular';
 import { Animation } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { BdlocalService } from 'src/app/service/bdlocal.service';
+import { BdlocalService } from 'src/app/services/bdlocal.service';
 
 @Component({
 

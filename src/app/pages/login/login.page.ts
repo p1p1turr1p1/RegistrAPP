@@ -5,7 +5,7 @@ import { Animation } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
-import { BdlocalService } from 'src/app/service/bdlocal.service';
+import { BdlocalService } from 'src/app/services/bdlocal.service';
 
 
 @Component({
