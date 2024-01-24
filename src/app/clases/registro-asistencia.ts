@@ -1,6 +1,6 @@
 export class RegistroAsistencia {
-    id: string;
-    alumno: string;
+    $key: string;
+    email_usuario: string;
     asignatura:string;
     profesor:string;
     fecha:string;
