@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RegistroAsistencia } from 'src/app/clases/registro-asistencia';
 import { ServicerestService } from 'src/app/services/servicerest.service';
 import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
+import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-codigo-qr',
@@ -14,7 +16,50 @@ export class CodigoQrComponent implements OnInit {
   serviceID = 'default_service';
   templateID = 'template_9z2bw0r';
 
-  constructor(private serviceRest: ServicerestService) { }
+  constructor(private serviceRest: ServicerestService,private barcodeScanner: BarcodeScanner, private alertController: AlertController) { }
+
+  code: any;
+
+  codeEjemplo: String = 'Asignatura: INI2020\nFecha: 14/12/23\nDocente: Patricia Maldonado\nEstado: Justificado\n'
+
+  estadoRegex = /Estado: (.+?)\n/;
+  fechaRegex = /Fecha: (.+?)\n/;
+  profesorRegex = /Docente: (.+?)\n/;
+  asignaturaRegex = /Asignatura: (.+?)\n/;
+
+  qrEstado : string = '';
+  qrFecha: string = '';
+  qrProfesor: string = '';
+  qrAsignatura: string = '';
+
+  async scannerQr() {
+    this.barcodeScanner
+      .scan().then(async (barcodeData) => {
+        this.code = barcodeData.text
+        
+
+        console.log('Barcode data', barcodeData);
+        this.qrAsignatura = this.code.match(this.asignaturaRegex);
+        this.qrEstado = this.code.match(this.estadoRegex);
+        this.qrFecha = this.code.match(this.fechaRegex);
+        this.qrProfesor = this.code.match(this.profesorRegex);
+
+        await this.presentAlert();
+      })
+      .catch((err) => {
+        console.log('Error', err);
+      });
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Confirmar Datos',
+      inputs: this.alertInputs,
+      buttons: this.alertButtons,
+    });
+  
+    
+  }
 
   public alertButtons = [
     {
@@ -62,28 +107,28 @@ export class CodigoQrComponent implements OnInit {
       id: 'asignatura',
       name: 'asignatura',
       placeholder: 'Asignatura',
-      value: 'INI1313',
+      value: this.qrAsignatura,
 
     },
     {
       id: 'profesor',
       name: 'profesor',
       placeholder: 'Profesor',
-      value: 'Daniel Lopez',
+      value: this.qrProfesor,
 
     },
     {
       id: 'fecha',
       name: 'fecha',
       placeholder: 'Fecha',
-      value: '14:30',
+      value: this.qrFecha,
 
     },
     {
       id: 'estado',
       name: 'estado',
       placeholder: 'Estado',
-      value: 'Presente',
+      value: this.qrEstado,
 
     },
   ];
@@ -95,5 +140,7 @@ export class CodigoQrComponent implements OnInit {
     console.log(`Dismissed with role: ${ev.detail.role}`);
   }
 
+
+  
 
 }

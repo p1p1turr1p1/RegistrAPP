@@ -18,7 +18,7 @@ import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 export class HomePage implements OnInit {
   loggedUsuario: string = ''; //almacena usuario
 
-  code: any;
+  
   constructor(private router: Router, private barcodeScanner: BarcodeScanner) {}
 
   ngOnInit() {
@@ -34,16 +34,5 @@ export class HomePage implements OnInit {
 
   irAsistencia() {
     this.router.navigate(['/asistencia']);
-  }
-
-  scannerQr() {
-    this.barcodeScanner
-      .scan().then((barcodeData) => {
-        this.code =barcodeData.text
-        console.log('Barcode data', barcodeData);
-      })
-      .catch((err) => {
-        console.log('Error', err);
-      });
   }
 }
