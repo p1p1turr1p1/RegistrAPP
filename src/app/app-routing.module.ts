@@ -5,39 +5,61 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule),
+    loadChildren: () =>
+      import('./pages/home/home.module').then((m) => m.HomePageModule),
   },
   {
     path: '',
     redirectTo: 'login',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () =>
+      import('./pages/login/login.module').then((m) => m.LoginPageModule),
   },
   {
     path: 'recuperar',
-    loadChildren: () => import('./pages/recuperar/recuperar.module').then( m => m.RecuperarPageModule)
+    loadChildren: () =>
+      import('./pages/recuperar/recuperar.module').then(
+        (m) => m.RecuperarPageModule
+      ),
   },
-   {
+  {
     path: 'codigo',
-    loadChildren: () => import('./pages/codigo/codigo.module').then( m => m.CodigoPageModule)
-   },
-   {
+    loadChildren: () =>
+      import('./pages/codigo/codigo.module').then((m) => m.CodigoPageModule),
+  },
+  {
     path: 'asistencia',
-    loadChildren: () => import('./pages/asistencia/asistencia.module').then( m => m.AsistenciaPageModule)
-   },
+    loadChildren: () =>
+      import('./pages/asistencia/asistencia.module').then(
+        (m) => m.AsistenciaPageModule
+      ),
+  },
+  {
+    path: 'signup',
+    loadChildren: () => import('./pages/signup/signup.module').then( m => m.SignupPageModule)
+  },
+
+
+
+
+
+
+
+
+
   {
     path: '**',
-    component: NotFoundComponent 
+    component: NotFoundComponent,
   },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,0 +1,87 @@
+
+
+<ion-content [fullscreen]="true">
+
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-grid>
+        <div class="ion-text-center ion-padding">
+          <ion-row>
+            <ion-col size="3">
+              <img src="./assets/logo/codigo-qr.png" alt="logo2" width="100px" height="auto">
+            </ion-col>
+            <ion-col size="9">
+              <img src="./assets/logo/images.png" alt="logo" width="200px" height="auto">
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-grid>
+      
+  
+    </ion-toolbar>
+  </ion-header>
+  
+    <ion-header collapse="condense">
+      <ion-toolbar>
+      </ion-toolbar>
+    </ion-header>
+  
+    <ion-card color="light">
+      <ion-card-header>
+        <ion-card-title >Registro</ion-card-title>
+      </ion-card-header>
+      
+      <form [formGroup]="ionicForm" novalidate>
+        <div class="ion-padding">
+          <ion-item >
+            <ion-input class="input" formControlName="fullname" placeholder="Usuario" />
+            <ion-icon slot="end" name="person-outline"></ion-icon>
+          </ion-item>
+          <div style="padding-top: -26px;padding-bottom: 16px;"
+            *ngIf="this.ionicForm.controls?.['fullname'].touched && this.ionicForm.controls?.['fullname'].invalid">
+            <ion-text *ngIf="errorControl.fullname.errors?.required" class="errorInput" color="danger">¡Ingresa el nombre de usuario!</ion-text>
+          </div>
+          <ion-item>
+            <ion-input class="input" formControlName="email" placeholder="Correo" />
+            <ion-icon slot="end" name="mail-outline"></ion-icon>
+          </ion-item>
+          <div style="padding-top: -26px;padding-bottom: 16px;"
+            *ngIf="this.ionicForm.controls?.['email'].touched && this.ionicForm.controls?.['email'].invalid">
+            <ion-text *ngIf="errorControl.email.errors?.required" class="errorInput" color="danger">¡Ingresa tu correo!</ion-text>
+            <ion-text *ngIf="errorControl.email.errors?.pattern" class="errorInput" color="danger">¡Ingresa un correo valido!</ion-text>
+          </div>
+          <ion-item>
+            <ion-input class="input" type="password" formControlName="password" placeholder="Contraseña" />
+            <ion-icon slot="end" name="lock-closed-outline"></ion-icon>
+          </ion-item>
+          <div style="padding-top: -26px;padding-bottom: 16px;"
+            *ngIf="this.ionicForm.controls?.['password'].touched && this.ionicForm.controls?.['password'].invalid">
+            <ion-text *ngIf="errorControl.password.errors?.required" class="errorInput" color="danger">¡Ingresa una contraseña!</ion-text>
+            <ion-text *ngIf="errorControl.password.errors?.pattern" class="errorInput" color="danger">La contraseña debe tener más de 8 caracteres,
+              por lo menos una letra, por lo menos una mayuscula y por lo menos un numero.
+            </ion-text>
+          </div>
+          <ion-item>
+            <ion-input class="input" type="numeric" formControlName="contact" placeholder="Número telefónico (ej: 968975595)" />
+            <ion-icon slot="end" name="call-outline"></ion-icon>
+          </ion-item>
+          <div style="padding-top: -26px;padding-bottom: 16px;"
+            *ngIf="this.ionicForm.controls?.['contact'].touched && this.ionicForm.controls?.['contact'].invalid">
+            <ion-text *ngIf="errorControl.contact.errors?.required" class="errorInput" color="danger">¡Ingresa tu número de telefono!</ion-text>
+              <ion-text *ngIf="errorControl.contact.errors?.pattern" class="errorInput" color="danger">¡Tu telefono son numeros, no letras!</ion-text>
+              <ion-text *ngIf="errorControl.contact.errors?.minlength" class="errorInput" color="danger">Tu número deben ser 9 digitos.</ion-text>
+        
+            </div>
+          
+<br>    
+    <ion-button (click)="signUP()" color="warning" expand="block">Registrarse   <ion-icon slot="end" name="add-circle-outline"></ion-icon> </ion-button>
+    <br>
+          <div class="loginLink">
+            <p class="p">Si ya estás registrado <a [routerLink]="['/login']" style="color: #ece800">Ingresar</a></p>
+          </div>
+        </div>
+  
+
+        <br>    
+
+  

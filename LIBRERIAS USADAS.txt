@@ -2,11 +2,15 @@ LIBRERIAS USADAS:
 
 
 npm install @ionic-native/core --legacy-peer-deps
-npm install @ionic/storage-angular
-npm install @angular/cli -g
-npm install -g json-server
-npm i ngx-search-filter --save (--force)
-
+npm install @ionic/storage-angular --f
+npm install @angular/cli -g --f
+npm install -g json-server --f
+npm i ngx-search-filter --save --force
+npm install @angular/fire firebase --save --f  
+npm install phonegap-plugin-barcodescanner --f
+npm install @awesome-cordova-plugins/barcode-scanner --f
+npm install @capacitor/splash-screen --f
+npm install @emailjs/browser --save --f
 
 
 Links Utilidad:
