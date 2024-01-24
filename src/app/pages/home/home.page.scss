@@ -36,3 +36,14 @@ ion-button{
   margin-left: 1rem;
   margin-right: 1rem;
 }
+
+//diseño general 
+ion-toolbar {
+  --background: #0d4c95;
+  --color: white;
+  --border-color: #ffc409;
+  --border-width: 4px 0;
+  --min-height: 80px;
+  --padding-top: 20px;
+  --padding-bottom: 20px;
+}

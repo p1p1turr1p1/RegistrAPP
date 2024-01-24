@@ -1,11 +1,15 @@
-import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 import { AnimationController, IonCard, IonTitle } from '@ionic/angular';
 import { Animation } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { BdlocalService } from 'src/app/services/bdlocal.service';
 
 @Component({
-
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
@@ -13,8 +17,7 @@ import { BdlocalService } from 'src/app/services/bdlocal.service';
 export class HomePage implements OnInit {
   loggedUsuario: string = ''; //almacena usuario
 
-
-  constructor(private router: Router, private bdlocalservice: BdlocalService) { }
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.loggedUsuario = localStorage.getItem('username') || '';
@@ -22,14 +25,12 @@ export class HomePage implements OnInit {
 
   logOut() {
     this.router.navigate(['/login']);
-
-
   }
-  irCodigo(){
-    this.router.navigate(['/codigo/codigoQr'])
+  irCodigo() {
+    this.router.navigate(['/codigo/codigoQr']);
   }
 
-  irAsistencia(){
-    this.router.navigate(['/asistencia'])
+  irAsistencia() {
+    this.router.navigate(['/asistencia']);
   }
 }
