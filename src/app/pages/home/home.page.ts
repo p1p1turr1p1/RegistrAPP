@@ -8,6 +8,7 @@ import {
 import { AnimationController, IonCard, IonTitle } from '@ionic/angular';
 import { Animation } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,8 @@ import { Router } from '@angular/router';
 export class HomePage implements OnInit {
   loggedUsuario: string = ''; //almacena usuario
 
-  constructor(private router: Router) {}
+  code: any;
+  constructor(private router: Router, private barcodeScanner: BarcodeScanner) {}
 
   ngOnInit() {
     this.loggedUsuario = localStorage.getItem('username') || '';
@@ -32,5 +34,16 @@ export class HomePage implements OnInit {
 
   irAsistencia() {
     this.router.navigate(['/asistencia']);
+  }
+
+  scannerQr() {
+    this.barcodeScanner
+      .scan().then((barcodeData) => {
+        this.code =barcodeData.text
+        console.log('Barcode data', barcodeData);
+      })
+      .catch((err) => {
+        console.log('Error', err);
+      });
   }
 }
