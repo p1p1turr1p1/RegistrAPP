@@ -1,104 +1,88 @@
+
 <ion-content [fullscreen]="true">
 
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-grid>
-      <div class="ion-text-center ion-padding">
-        <ion-row>
-          <ion-col size="3">
-            <img src="./assets/logo/codigo-qr.png" alt="logo2" width="100px" height="auto">
-          </ion-col>
-          <ion-col size="9">
-            <img src="./assets/logo/images.png" alt="logo" width="200px" height="auto">
-          </ion-col>
-        </ion-row>
-      </div>
-    </ion-grid>
-    
-
-  </ion-toolbar>
-</ion-header>
-
-  <ion-header collapse="condense">
+  <ion-header [translucent]="true">
     <ion-toolbar>
+      <ion-grid>
+        <div class="ion-text-center ion-padding">
+          <ion-row>
+            <ion-col size="3">
+              <img src="./assets/logo/codigo-qr.png" alt="logo2" width="100px" height="auto">
+            </ion-col>
+            <ion-col size="9">
+              <img src="./assets/logo/images.png" alt="logo" width="200px" height="auto">
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-grid>
+      
+  
     </ion-toolbar>
   </ion-header>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title >Inicio de Sesión</ion-card-title>
-    </ion-card-header>
-    <ion-item class="ion-padding">
-      <ion-item>
-        <ion-input labelPlacement="floating" type="text" class="form-control" position="floating" label="  Usuario:" placeholder="Ingresa nombre de usuario." [(ngModel)]="username"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input labelPlacement="floating"  class="form-control" position="floating" label="  Contraseña:" type="password"  placeholder="Ingresa tu contraseña." [(ngModel)]="password"></ion-input>
-      </ion-item>
-      </ion-item>
-      <ion-button expand="block" [disabled]="username === ''||password === '' " (click)="login()">Entrar</ion-button>
-      <br>    
+  
+    <ion-header collapse="condense">
+      <ion-toolbar>
+      </ion-toolbar>
+    </ion-header>
+  
+    <ion-card color="light">
+      <ion-card-header>
+        <ion-card-title >Inicio de Sesión</ion-card-title>
+      </ion-card-header>
       
+      <form [formGroup]="ionicForm"  novalidate>
+        <div class="ion-padding">
+    
+          <ion-item>
+            <ion-label></ion-label>
+            <ion-input placeholder="Correo" formControlName="email" />
+            <ion-icon name="mail" class="iconLabel"></ion-icon>
+            
+          </ion-item>
+        
+          <div style="padding-top: -26px;padding-bottom: 16px;" *ngIf="this.ionicForm.controls?.['email'].touched && this.ionicForm.controls?.['email'].invalid">
+              <ion-text *ngIf="errorControl.email.errors?.required" class="errorInput" color="danger">¡Ingresa el email!</ion-text>
+              <ion-text *ngIf="errorControl.email.errors?.pattern" class="errorInput" color="danger">¡Ingresa un email valido!</ion-text>
+          </div>
+          <ion-item>
+            <ion-label></ion-label>
+            <ion-input type="password" placeholder="Contraseña" formControlName="password" class="input" />
+            <ion-icon name="lock-closed"></ion-icon>
+          </ion-item>
+          <div style="padding-top: -26px;padding-bottom: 16px;" *ngIf="this.ionicForm.controls?.['password'].touched && this.ionicForm.controls?.['password'].invalid">
+              <ion-text *ngIf="errorControl.password.errors?.required" class="errorInput" color="danger">¡Ingresa tu contraseña!</ion-text>
+              <ion-text *ngIf="errorControl.password.errors?.pattern" class="errorInput"  color="danger">La contraseña debe tener al menos un caracter.</ion-text>
+          </div>
+          <br>  
+          <ion-button type="submit" (click)="login()"  color="warning"  expand="block"  >Ingresar <ion-icon name="log-out-outline" slot="end"></ion-icon></ion-button>
+<br> <br><br>          
+          <div class="forgotpassword">
+            <a [routerLink]="['/forgot-password']" style="color: #0766a6">Recuperar contraseña.</a>
+          </div>
 
-      <!-- MODAL Y BOTON -->
-
-      <ion-button id="open-modal" expand="block" fill="outline" >¿Olvidaste tu contraseña?</ion-button>
-      <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
-        <ng-template>
-          <ion-header>
-            <ion-toolbar>
-              <ion-buttons slot="start">
-                <ion-button (click)="cancel()">Cancelar</ion-button>
-              </ion-buttons>
-              <ion-title class="centrar-titulomodal" >Recuprar pass.</ion-title>
-              <ion-toast trigger="open-toast" message="{{mensaje}}" [duration]="5000"></ion-toast>
-              <ion-buttons slot="end">
-                <ion-button (click)="confirm()" [strong]="true" id="open-toast" >Confirmar</ion-button>
-              </ion-buttons>
-            </ion-toolbar>
-          </ion-header>
-          <ion-content class="ion-padding">
-            <ion-item>
-              <ion-input
-                label="Ingresa el correo con el que creaste tu cuenta."
-                labelPlacement="stacked"
-                type="email"
-                placeholder="email@algo.com"
-                [(ngModel)]="correo"
-              ></ion-input>
-            </ion-item>
-          </ion-content>
-        </ng-template>
-      </ion-modal>
-      <br>
-
-      <ion-button id="modal-registro" expand="block">Registro</ion-button>
-      <ion-modal #modal trigger="modal-registro" (willDismiss)="onWillDismiss($event) ">
-        <ng-template>
-          <ion-header>
-            <ion-toolbar>
-              <ion-title>Registrarse</ion-title>
-              <ion-buttons slot="end">
-                <ion-button (click)="modal.dismiss()">Cerrar</ion-button>
-              </ion-buttons>
-            </ion-toolbar>
-          </ion-header>
-          <ion-content class="ion-padding">
-            <p>
-              <ion-input type="text" placeholder="Ingrese Nombre:" [(ngModel)]="username"></ion-input>
-              <ion-input type="password" placeholder="Ingrese contraseña:" [(ngModel)]="password"></ion-input>
-              <ion-input type="email" placeholder="algo@algo.com" [(ngModel)]="email"></ion-input>
-              <ion-button shape="block" (click)="registrar()" type="button" class="btn btn-success">Registrarse</ion-button> 
-            </p>
-          </ion-content>
-        </ng-template>
-      </ion-modal>
+        </div>
+        <div class="signupLink">
+          <p class="p">Si aun no tienes acceso <a [routerLink]="['/signup']" style="color: #029ecd">Registrate aquí.</a></p>
+        </div>
+    
+        <br>
+      </form>
 
 
 
 
-     
+        <br>    
 
-    </ion-card>
+      
+  
+  
+       
+  
+      </ion-card>
+  
+  </ion-content>
 
-</ion-content>
+
+
+
+
