@@ -32,33 +32,31 @@ export class CodigoQrComponent implements OnInit {
   qrProfesor: string = '';
   qrAsignatura: string = '';
 
+  
+
   async scannerQr() {
     this.barcodeScanner
-      .scan().then(async (barcodeData) => {
+      .scan().then((barcodeData) => {
         this.code = barcodeData.text
         
-
         console.log('Barcode data', barcodeData);
         this.qrAsignatura = this.code.match(this.asignaturaRegex);
         this.qrEstado = this.code.match(this.estadoRegex);
         this.qrFecha = this.code.match(this.fechaRegex);
         this.qrProfesor = this.code.match(this.profesorRegex);
 
-        await this.presentAlert();
-      })
+        this.cambiarValoresInputs();
+        
+
+        this.setOpen(true);
+      }).then()
       .catch((err) => {
         console.log('Error', err);
       });
   }
-
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      header: 'Confirmar Datos',
-      inputs: this.alertInputs,
-      buttons: this.alertButtons,
-    });
-  
-    
+  isAlertOpen = false;
+  async setOpen(isOpen: boolean) {
+    this.isAlertOpen = isOpen;
   }
 
   public alertButtons = [
@@ -132,6 +130,29 @@ export class CodigoQrComponent implements OnInit {
 
     },
   ];
+  cambiarValoresInputs() {
+    
+    this.alertInputs.forEach(input => {
+      switch (input.id) {
+        case 'asignatura':
+         
+          input.value = this.qrAsignatura;
+          break;
+        case 'profesor':
+          
+          input.value = this.qrProfesor;
+          break;
+        case 'fecha':
+          input.value = this.qrFecha;
+          break; 
+        case 'estado':
+          
+          input.value = this.qrEstado;
+          break;
+        
+      }
+    });
+  }
   ngOnInit() { 
     this.serviceRest.fetchRegistros();
   }
