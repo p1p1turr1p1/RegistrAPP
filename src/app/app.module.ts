@@ -12,28 +12,26 @@ import { AuthServiceService } from './services/auth.service';
 import { environment } from 'src/environments/environment';
 import { BarcodeScanner } from'@awesome-cordova-plugins/barcode-scanner/ngx';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule, 
-    IonicModule.forRoot(), 
+    BrowserModule,
+    IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
     IonicStorageModule.forRoot(),
-    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
-    AngularFirestoreModule,
-    AngularFireStorageModule,
-    AngularFireDatabaseModule,
+    AngularFireModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig), 
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule   
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, 
-              Storage, BarcodeScanner],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Storage,BarcodeScanner
+  ],
+
   bootstrap: [AppComponent],
 })
 export class AppModule {}

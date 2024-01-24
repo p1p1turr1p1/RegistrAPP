@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicerestService } from 'src/app/services/servicerest.service';
 import { Router } from '@angular/router';
-import { RegistroAsistencia } from 'src/app/clases/registro-asistencia';
 @Component({
   selector: 'app-asistencia',
   templateUrl: './asistencia.page.html',
@@ -16,19 +15,12 @@ export class AsistenciaPage implements OnInit {
 
 
   ngOnInit(): void {
-    this.serviceRest.fetchRegistros();
-    let registroRes = this.serviceRest.getRegistroList();
-    registroRes.snapshotChanges().subscribe((res) => {
-      this.registros = [];
-      res.forEach((item) => {
-        let a: any = item.payload.toJSON();
-        a['$key'] = item.key;
-        this.registros.push(a as RegistroAsistencia);
-      });
+    this.serviceRest.getRegistroList().subscribe((data) => {
+      console.log(data);
+      this.registros = data;
     });
   }
 
-  
   filtrarAsignatura(registro:any){
 
   }
