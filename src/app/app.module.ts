@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule, Storage } from '@ionic/storage-angular';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AuthServiceService } from './services/auth.service';
@@ -23,6 +25,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     IonicStorageModule.forRoot(),
     AngularFireAuthModule,
     AngularFireModule,
+    AngularFirestoreModule,
+    AngularFireDatabaseModule,
     AngularFireModule.initializeApp(environment.firebaseConfig), 
     FormsModule,
     ReactiveFormsModule   
