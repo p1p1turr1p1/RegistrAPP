@@ -9,6 +9,7 @@ npm i ngx-search-filter --save (--force)
 npm install @angular/fire firebase --save       
 npm install phonegap-plugin-barcodescanner
 npm install @awesome-cordova-plugins/barcode-scanner
+npm install @capacitor/splash-screen
 
 
 
