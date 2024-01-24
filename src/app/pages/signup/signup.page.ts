@@ -21,7 +21,6 @@ export class SignupPage implements OnInit {
   }
 
   ngOnInit() {
-    // this.signUP()
     this.ionicForm = this.formBuilder.group({
       fullname:['',
         [Validators.required]
@@ -31,7 +30,6 @@ export class SignupPage implements OnInit {
         Validators.required,
         Validators.pattern("^[0-9]*$"),
         Validators.minLength(9),
-        // Validators.min(10)
       ]
     ],
       email: [
@@ -74,10 +72,7 @@ export class SignupPage implements OnInit {
       return console.log('Please provide all the required values!');
     }
   }
-  signUpUsingPhonenumber(contact:string){
-    
-    this.authService.signInWithPhoneNumber(contact)
-  }
+
 
 
  async presentToast(mensaje:string) {
