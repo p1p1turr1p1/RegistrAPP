@@ -12,13 +12,9 @@ import { AuthServiceService } from './services/auth.service';
 import { environment } from 'src/environments/environment';
 import { BarcodeScanner } from'@awesome-cordova-plugins/barcode-scanner/ngx';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,7 +33,7 @@ import { environment } from '../environments/environment';
     ReactiveFormsModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, 
-              Storage, AuthGuard, BarcodeScanner],
+              Storage, BarcodeScanner],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
