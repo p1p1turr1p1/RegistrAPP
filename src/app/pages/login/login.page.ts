@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/services/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -6,6 +6,8 @@ import { AlertController, AnimationController, IonImg, LoadingController } from 
 import { ToastController } from '@ionic/angular';
 import { BdlocalService } from 'src/app/services/bdlocal.service';
 import { Animation } from '@ionic/angular';
+import { OverlayEventDetail } from '@ionic/core/components';
+import { IonModal } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -14,11 +16,11 @@ import { Animation } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
   ionicForm: FormGroup;
+  @ViewChild(IonModal) modal: IonModal;
 
   email: any;
   password: any;
   contact: any;
-
   constructor(
     private toastController: ToastController,
     private alertController: AlertController,
@@ -30,6 +32,7 @@ export class LoginPage implements OnInit {
     private animationCtrl: AnimationController,
 
   ) { }
+
 
   async ngOnInit() {
 
@@ -130,4 +133,22 @@ export class LoginPage implements OnInit {
   ngAfterViewInit(){
     this.animacion();
   }
+
+cancel() {
+  this.modal.dismiss(null, 'cancel');
 }
+
+confirm() {
+  this.modal.dismiss(this.correo, 'confirm');
+}
+
+mensaje = '';
+
+onWillDismiss(event: Event) {
+  const ev = event as CustomEvent<OverlayEventDetail<string>>;
+  if (ev.detail.role === 'confirm') {
+    this.mensaje = `Se ha enviado un link de recupareción a tu correo.`;
+  }
+}
+}
+
