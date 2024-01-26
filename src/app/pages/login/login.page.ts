@@ -32,6 +32,7 @@ export class LoginPage implements OnInit {
   ) { }
 
   async ngOnInit() {
+
     this.ionicForm = this.formBuilder.group({
       email: [
         '',

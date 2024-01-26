@@ -29,7 +29,7 @@ export class BdlocalService {
     console.log('BD CARGADA/CREADA')
     this.getAuthUser('usuarioAutenticado');
   }
-  
+
   async cargarUser() {
     const miUser=await this.storage.get('user');
     if (miUser) {
