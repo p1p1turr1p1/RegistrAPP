@@ -34,12 +34,7 @@ export class HomePage implements OnInit {
 
   async ngOnInit() {
     
-    try {
-      const usuarioAutenticado = await this.storage.get('usuarioAutenticado');
-      this.loggedUsuario = usuarioAutenticado?.username;
-    } catch (error) {
-      console.error('Error retrieving username:', error);
-    }
+  this.getWeas();  
 
   }
 
@@ -53,4 +48,16 @@ export class HomePage implements OnInit {
   irAsistencia() {
     this.router.navigate(['/asistencia']);
   }
+
+  async getWeas() {
+    try {
+      const usuarioAutenticado = await this.storage.get('usuarioAutenticado');
+      this.loggedUsuario = usuarioAutenticado?.username;
+      console.log('funka el mostrar nombreuser')
+    } catch (error) {
+      console.error('Error retrieving username:', error);
+    }
+  }
+
+  
 }
