@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ServicerestService } from 'src/app/services/servicerest.service';
 import { Router } from '@angular/router';
 import { RegistroAsistencia } from 'src/app/clases/registro-asistencia';
+import { Storage } from '@ionic/storage';
+
 @Component({
   selector: 'app-asistencia',
   templateUrl: './asistencia.page.html',
@@ -12,11 +14,11 @@ export class AsistenciaPage implements OnInit {
   listaAsignaturas: any;
   registros: any;
 
-  correoActivo = 'valenzuela.alou01@gmail.com'; //CAMBIAR POR USER ACTIVO LOCAL STORAGE!!!
-  constructor(private serviceRest: ServicerestService, private router: Router) { }
+  constructor(private serviceRest: ServicerestService, private router: Router,private storage: Storage,) { }
 
 
   ngOnInit(): void {
+    this.getWeas();
     this.serviceRest.fetchRegistros();
      
     let registroRes = this.serviceRest.getRegistroList();
@@ -25,7 +27,7 @@ export class AsistenciaPage implements OnInit {
       res.forEach((item) => {
         let a: any = item.payload.toJSON();
         a['$key'] = item.key;
-        if (a['email_usuario'] == this.correoActivo){
+        if (a['email_usuario'] == this.correoDelLoco){
           this.registros.push(a as RegistroAsistencia);
         }
       })
@@ -54,6 +56,16 @@ export class AsistenciaPage implements OnInit {
     }
     return listaUnica;
 }
+  correoDelLoco: string = ''; //almacena usuario
 
+async getWeas(){
+  try {
+    const usuarioAutenticado = await this.storage.get('usuarioAutenticado');
+    this.correoDelLoco = usuarioAutenticado?.email;
+    console.log('funka el mostrar nombreuser');
+  } catch (error) {
+    console.error('Error retrieving username:', error);
+  }
+}
 
 }

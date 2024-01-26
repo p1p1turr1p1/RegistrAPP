@@ -5,6 +5,7 @@ import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
 import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 import { AlertController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-codigo-qr',
@@ -12,16 +13,22 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./codigo-qr.component.scss'],
 })
 export class CodigoQrComponent implements OnInit {
-
-
   serviceID = 'default_service';
   templateID = 'template_9z2bw0r';
 
-  constructor(private serviceRest: ServicerestService, private barcodeScanner: BarcodeScanner, private alertController: AlertController, private toastController:ToastController) { }
+  constructor(
+    private serviceRest: ServicerestService,
+    private barcodeScanner: BarcodeScanner,
+    private alertController: AlertController,
+    private toastController: ToastController,
+    private storage: Storage,
+
+  ) {}
 
   code: any;
 
-  codeEjemplo: String = 'Asignatura: INI2020\nFecha: 14/12/23\nDocente: Patricia Maldonado\nEstado: Justificado\n'
+  codeEjemplo: String =
+    'Asignatura: INI2020\nFecha: 14/12/23\nDocente: Patricia Maldonado\nEstado: Justificado\n';
 
   estadoRegex = /Estado: (.+?)\n/;
   fechaRegex = /Fecha: (.+?)\n/;
@@ -33,12 +40,11 @@ export class CodigoQrComponent implements OnInit {
   qrProfesor: string = '';
   qrAsignatura: string = '';
 
-
-
   async scannerQr() {
     this.barcodeScanner
-      .scan().then(async (barcodeData) => {
-        this.code = barcodeData.text
+      .scan()
+      .then(async (barcodeData) => {
+        this.code = barcodeData.text;
         const listaDatos = this.code.split('-');
         console.log('Barcode data', barcodeData);
         this.qrAsignatura = listaDatos[0];
@@ -46,25 +52,25 @@ export class CodigoQrComponent implements OnInit {
         this.qrFecha = listaDatos[1];
         this.qrProfesor = listaDatos[2];
 
-        if(!this.code){
+        if (this.code) {
           await this.presentAlert();
-        }    
-      }).then()
+        }
+      })
+      .then()
       .catch((err) => {
         console.log('Error', err);
       });
   }
 
-  async presentToast(mensaje:string) {
+  async presentToast(mensaje: string) {
     const toast = await this.toastController.create({
       message: mensaje,
-      translucent:true,
-      color:'medium',
+      translucent: true,
+      color: 'medium',
       position: 'top',
-      duration: 2000
+      duration: 2000,
     });
     toast.present();
-  
 
     await toast.present();
   }
@@ -76,36 +82,36 @@ export class CodigoQrComponent implements OnInit {
           id: 'email_usuario',
           name: 'email_usuario',
           placeholder: 'email',
-          value: 'valenzuela.alou01@gmail.com',
-          disabled: true
+          value: this.correoDelLoco,
+          disabled: true,
         },
         {
           id: 'asignatura',
           name: 'asignatura',
           placeholder: 'Asignatura',
           value: this.qrAsignatura,
-          disabled: true
+          disabled: true,
         },
         {
           id: 'profesor',
           name: 'profesor',
           placeholder: 'Profesor',
           value: this.qrProfesor,
-          disabled: true
+          disabled: true,
         },
         {
           id: 'fecha',
           name: 'fecha',
           placeholder: 'Fecha',
           value: this.qrFecha,
-          disabled: true
+          disabled: true,
         },
         {
           id: 'estado',
           name: 'estado',
           placeholder: 'Estado',
           value: this.qrEstado,
-          disabled: true
+          disabled: true,
         },
       ],
       buttons: [
@@ -114,38 +120,44 @@ export class CodigoQrComponent implements OnInit {
           role: 'cancel',
           handler: () => {
             console.log('Alert canceled');
-          }
+          },
         },
         {
           text: 'Confirmar',
           role: 'confirm',
           handler: (data: any) => {
-
             var templateParams = {
               email_usuario: data.email_usuario,
               message: `Asignatura: ${data.asignatura}\n
                         Profesor(a):  ${data.profesor}\n
                         Fecha: ${data.fecha}\n
-                        Estado: ${data.estado}`
+                        Estado: ${data.estado}`,
             };
             console.log(templateParams);
             console.log(data);
 
-
-            emailjs.send(this.serviceID, this.templateID, templateParams, '6nmhBUsLCjaV0tcvR')
-              .then(function (response) {
-                console.log('SUCCESS!', response.status, response.text);
-              }, function (error) {
-                console.log('FAILED...', error);
-              });
+            emailjs
+              .send(
+                this.serviceID,
+                this.templateID,
+                templateParams,
+                '6nmhBUsLCjaV0tcvR'
+              )
+              .then(
+                function (response) {
+                  console.log('SUCCESS!', response.status, response.text);
+                },
+                function (error) {
+                  console.log('FAILED...', error);
+                }
+              );
             this.serviceRest.addRegistro(data);
             this.presentToast('Registro exitoso.');
-
           },
-        }
+        },
       ],
     });
-    
+
     await alert.present();
   }
 
@@ -155,33 +167,40 @@ export class CodigoQrComponent implements OnInit {
       role: 'cancel',
       handler: () => {
         console.log('Alert canceled');
-      }
+      },
     },
     {
       text: 'Confirmar',
       role: 'confirm',
       handler: (data: any) => {
-
         var templateParams = {
           email_usuario: data.email_usuario,
           message: `Asignatura: ${data.asignatura}\n
                     Profesor(a):  ${data.profesor}\n
                     Fecha: ${data.fecha}\n
-                    Estado: ${data.estado}`
+                    Estado: ${data.estado}`,
         };
         console.log(templateParams);
         console.log(data);
 
-
-        emailjs.send(this.serviceID, this.templateID, templateParams, '6nmhBUsLCjaV0tcvR')
-          .then(function (response) {
-            console.log('SUCCESS!', response.status, response.text);
-          }, function (error) {
-            console.log('FAILED...', error);
-          });
+        emailjs
+          .send(
+            this.serviceID,
+            this.templateID,
+            templateParams,
+            '6nmhBUsLCjaV0tcvR'
+          )
+          .then(
+            function (response) {
+              console.log('SUCCESS!', response.status, response.text);
+            },
+            function (error) {
+              console.log('FAILED...', error);
+            }
+          );
         this.serviceRest.addRegistro(data);
       },
-    }
+    },
   ];
   public alertInputs = [
     {
@@ -189,69 +208,68 @@ export class CodigoQrComponent implements OnInit {
       name: 'email_usuario',
       placeholder: 'email',
       value: 'valenzuela.alou01@gmail.com',
-
     },
     {
       id: 'asignatura',
       name: 'asignatura',
       placeholder: 'Asignatura',
       value: this.qrAsignatura,
-
     },
     {
       id: 'profesor',
       name: 'profesor',
       placeholder: 'Profesor',
       value: this.qrProfesor,
-
     },
     {
       id: 'fecha',
       name: 'fecha',
       placeholder: 'Fecha',
       value: this.qrFecha,
-
     },
     {
       id: 'estado',
       name: 'estado',
       placeholder: 'Estado',
       value: this.qrEstado,
-
     },
   ];
   cambiarValoresInputs() {
-
-    this.alertInputs.forEach(input => {
+    this.alertInputs.forEach((input) => {
       switch (input.id) {
         case 'asignatura':
-
           input.value = this.qrAsignatura;
           break;
         case 'profesor':
-
           input.value = this.qrProfesor;
           break;
         case 'fecha':
           input.value = this.qrFecha;
           break;
         case 'estado':
-
           input.value = this.qrEstado;
           break;
-
       }
     });
   }
   ngOnInit() {
+    this.getWeas();
     this.serviceRest.fetchRegistros();
   }
 
-  setResult(ev: { detail: { role: any; }; }) {
+  setResult(ev: { detail: { role: any } }) {
     console.log(`Dismissed with role: ${ev.detail.role}`);
   }
 
+  correoDelLoco: string = ''; //almacena usuario
 
-
-
+  async getWeas() {
+    try {
+      const usuarioAutenticado = await this.storage.get('usuarioAutenticado');
+      this.correoDelLoco = usuarioAutenticado?.email;
+      console.log('funka el mostrar nombreuser');
+    } catch (error) {
+      console.error('Error retrieving username:', error);
+    }
+  }
 }
