@@ -46,7 +46,9 @@ export class CodigoQrComponent implements OnInit {
         this.qrFecha = listaDatos[1];
         this.qrProfesor = listaDatos[2];
 
-        await this.presentAlert();    
+        if(!this.code){
+          await this.presentAlert();
+        }    
       }).then()
       .catch((err) => {
         console.log('Error', err);
