@@ -9,6 +9,9 @@ import { AnimationController, IonCard, IonTitle } from '@ionic/angular';
 import { Animation } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
+import { BdlocalService } from 'src/app/services/bdlocal.service';
+import { Storage } from '@ionic/storage';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -17,12 +20,22 @@ import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 })
 export class HomePage implements OnInit {
   loggedUsuario: string = ''; //almacena usuario
+  nombreMostrar: string = '';
+  constructor(
+    private storage: Storage,
+    private router: Router,
+    private barcodeScanner: BarcodeScanner,
+    public bdlocalservice: BdlocalService,
+    private navCtrl: NavController
+  ) {
+    this.bdlocalservice.Init();
 
-  
-  constructor(private router: Router, private barcodeScanner: BarcodeScanner) {}
+  }
 
-  ngOnInit() {
-    this.loggedUsuario = localStorage.getItem('username') || '';
+  async ngOnInit() {
+    
+  this.getWeas();  
+
   }
 
   logOut() {
@@ -35,4 +48,16 @@ export class HomePage implements OnInit {
   irAsistencia() {
     this.router.navigate(['/asistencia']);
   }
+
+  async getWeas() {
+    try {
+      const usuarioAutenticado = await this.storage.get('usuarioAutenticado');
+      this.loggedUsuario = usuarioAutenticado?.username;
+      console.log('funka el mostrar nombreuser')
+    } catch (error) {
+      console.error('Error retrieving username:', error);
+    }
+  }
+
+  
 }

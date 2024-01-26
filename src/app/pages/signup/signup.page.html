@@ -34,7 +34,7 @@
       <form [formGroup]="ionicForm" novalidate>
         <div class="ion-padding">
           <ion-item >
-            <ion-input class="input" formControlName="fullname" placeholder="Usuario" />
+            <ion-input [(ngModel)]="usuarioname" class="input" formControlName="fullname" placeholder="Usuario" />
             <ion-icon slot="end" name="person-outline"></ion-icon>
           </ion-item>
           <div style="padding-top: -26px;padding-bottom: 16px;"
@@ -42,7 +42,7 @@
             <ion-text *ngIf="errorControl.fullname.errors?.required" class="errorInput" color="danger">¡Ingresa el nombre de usuario!</ion-text>
           </div>
           <ion-item>
-            <ion-input class="input" formControlName="email" placeholder="Correo" />
+            <ion-input [(ngModel)]="correo" class="input" formControlName="email" placeholder="Correo" />
             <ion-icon slot="end" name="mail-outline"></ion-icon>
           </ion-item>
           <div style="padding-top: -26px;padding-bottom: 16px;"

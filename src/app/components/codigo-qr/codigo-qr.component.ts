@@ -4,6 +4,7 @@ import { ServicerestService } from 'src/app/services/servicerest.service';
 import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
 import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 import { AlertController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-codigo-qr',
@@ -16,7 +17,7 @@ export class CodigoQrComponent implements OnInit {
   serviceID = 'default_service';
   templateID = 'template_9z2bw0r';
 
-  constructor(private serviceRest: ServicerestService, private barcodeScanner: BarcodeScanner, private alertController: AlertController) { }
+  constructor(private serviceRest: ServicerestService, private barcodeScanner: BarcodeScanner, private alertController: AlertController, private toastController:ToastController) { }
 
   code: any;
 
@@ -45,15 +46,26 @@ export class CodigoQrComponent implements OnInit {
         this.qrFecha = listaDatos[1];
         this.qrProfesor = listaDatos[2];
 
-        await this.presentAlert();
-
+        await this.presentAlert();    
       }).then()
       .catch((err) => {
         console.log('Error', err);
       });
   }
 
+  async presentToast(mensaje:string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      translucent:true,
+      color:'medium',
+      position: 'top',
+      duration: 2000
+    });
+    toast.present();
+  
 
+    await toast.present();
+  }
   async presentAlert() {
     let alert = await this.alertController.create({
       header: 'Confirmar datos',
@@ -125,6 +137,8 @@ export class CodigoQrComponent implements OnInit {
                 console.log('FAILED...', error);
               });
             this.serviceRest.addRegistro(data);
+            this.presentToast('Registro exitoso.');
+
           },
         }
       ],

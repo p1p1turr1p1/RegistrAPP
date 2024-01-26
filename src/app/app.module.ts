@@ -14,6 +14,7 @@ import { AuthServiceService } from './services/auth.service';
 import { environment } from 'src/environments/environment';
 import { BarcodeScanner } from'@awesome-cordova-plugins/barcode-scanner/ngx';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,8 +33,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule   
   ],
   providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    Storage,BarcodeScanner
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },Storage, AuthGuard,BarcodeScanner
   ],
 
   bootstrap: [AppComponent],
