@@ -12,7 +12,7 @@ import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 import { BdlocalService } from 'src/app/services/bdlocal.service';
 import { Storage } from '@ionic/storage';
 import { NavController } from '@ionic/angular';
-
+import { AuthServiceService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -26,7 +26,8 @@ export class HomePage implements OnInit {
     private router: Router,
     private barcodeScanner: BarcodeScanner,
     public bdlocalservice: BdlocalService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private auth: AuthServiceService,
   ) {
     this.bdlocalservice.Init();
 
@@ -38,8 +39,9 @@ export class HomePage implements OnInit {
 
   }
 
-  logOut() {
-    this.router.navigate(['/login']);
+  async logOut() {
+await this.auth.signOut();
+console.log('logout')
   }
   irCodigo() {
     this.router.navigate(['/codigo/codigoQr']);
