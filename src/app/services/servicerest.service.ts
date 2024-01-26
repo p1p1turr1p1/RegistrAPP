@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
-import { Observable,of,retry } from 'rxjs';
+import { Observable, of, retry } from 'rxjs';
 import { RegistroAsistencia } from '../clases/registro-asistencia';
 import {
   AngularFireDatabase,
@@ -16,15 +16,17 @@ export class ServicerestService {
   registroListRef: AngularFireList<any>;
   registroRef: AngularFireObject<any>;
 
-  constructor(private db: AngularFireDatabase) {}
+  
+
+  constructor(private db: AngularFireDatabase) { }
   // Create
   addRegistro(registro: RegistroAsistencia) {
     return this.registroListRef.push({
       email_usuario: registro.email_usuario,
-      asignatura:registro.asignatura,
-      profesor:registro.profesor,
-      fecha:registro.fecha,
-      estado:registro.estado,
+      asignatura: registro.asignatura,
+      profesor: registro.profesor,
+      fecha: registro.fecha,
+      estado: registro.estado,
     });
   }
   // Get Single
@@ -37,14 +39,24 @@ export class ServicerestService {
     this.registroListRef = this.db.list('/asistencia');
     return this.registroListRef;
   }
+  
+  getRegistroListPorAlumno(correo : String){
+    this
+      .getRegistroList()
+      .valueChanges()
+      .subscribe((res) => {
+        const listaFiltrada = res.filter(element => element.email_usuario === correo);
+        return listaFiltrada;
+      });
+  }
   // Update
   updateRegistro(id: any, registro: RegistroAsistencia) {
     return this.registroRef.update({
       email_usuario: registro.email_usuario,
-      asignatura:registro.asignatura,
-      profesor:registro.profesor,
-      fecha:registro.fecha,
-      estado:registro.estado
+      asignatura: registro.asignatura,
+      profesor: registro.profesor,
+      fecha: registro.fecha,
+      estado: registro.estado
     });
   }
   // Delete
@@ -123,7 +135,7 @@ export class ServicerestService {
     };
   }
   **/
-  
+
 
 
 
